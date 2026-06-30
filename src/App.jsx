@@ -1,122 +1,123 @@
-import { useState } from 'react'
-import reactLogo from './assets/react.svg'
-import viteLogo from './assets/vite.svg'
-import heroImg from './assets/hero.png'
-import './App.css'
+// Styles are imported via src/index.css
+// Script functionality integrated via React hooks
+import React, { useEffect } from "react";
+import Home from "./pages/Home";
+import About from "./pages/About";
+import Services from "./pages/Services";
+import Approach from "./pages/Approach";
+import WhyNeto from "./pages/WhyNeto";
+import Careers from "./pages/Careers";
+import Insights from "./pages/Insights";
+import logo from "./assets/neto-logo.png";
+import Contact from "./pages/Contact";
+import { BrowserRouter as Router, Routes, Route, NavLink } from "react-router-dom";
 
-function App() {
-  const [count, setCount] = useState(0)
+/* -------------------------------------------------
+   Header – replicates original static header with navigation toggle
+   ------------------------------------------------- */
+function Header() {
+  useEffect(() => {
+    const toggle = document.querySelector('.nav-toggle');
+    const nav = document.querySelector('.site-nav');
+    const setNavOpen = (open) => {
+      if (!toggle || !nav) return;
+      nav.classList.toggle('open', open);
+      toggle.setAttribute('aria-expanded', open ? 'true' : 'false');
+      toggle.setAttribute('aria-label', open ? 'Close menu' : 'Open menu');
+    };
+    if (toggle && nav) {
+      const handleClick = () => setNavOpen(!nav.classList.contains('open'));
+      toggle.addEventListener('click', handleClick);
+      return () => toggle.removeEventListener('click', handleClick);
+    }
+  }, []);
 
   return (
-    <>
-      <section id="center">
-        <div className="hero">
-          <img src={heroImg} className="base" width="170" height="179" alt="" />
-          <img src={reactLogo} className="framework" alt="React logo" />
-          <img src={viteLogo} className="vite" alt="Vite logo" />
-        </div>
-        <div>
-          <h1>Get started</h1>
-          <p>
-            Edit <code>src/App.jsx</code> and save to test <code>HMR</code>
-          </p>
-        </div>
+    <header className="site-header" id="top">
+      <div className="container header-inner">
+        <a className="brand" href="#top" aria-label="Go to top">
+          <img src={logo} alt="NETO logo" className="logo-image" style={{ height: '70px', marginRight: '0.5rem' }} aria-hidden="true" />
+            <span className="brand-name">NETO Technology Solutions</span>
+        </a>
         <button
+          className="nav-toggle"
           type="button"
-          className="counter"
-          onClick={() => setCount((count) => count + 1)}
+          aria-label="Open menu"
+          aria-controls="site-nav"
+          aria-expanded="false"
         >
-          Count is {count}
+          <span className="nav-toggle-lines" aria-hidden="true"></span>
         </button>
-      </section>
-
-      <div className="ticks"></div>
-
-      <section id="next-steps">
-        <div id="docs">
-          <svg className="icon" role="presentation" aria-hidden="true">
-            <use href="/icons.svg#documentation-icon"></use>
-          </svg>
-          <h2>Documentation</h2>
-          <p>Your questions, answered</p>
-          <ul>
-            <li>
-              <a href="https://vite.dev/" target="_blank">
-                <img className="logo" src={viteLogo} alt="" />
-                Explore Vite
-              </a>
-            </li>
-            <li>
-              <a href="https://react.dev/" target="_blank">
-                <img className="button-icon" src={reactLogo} alt="" />
-                Learn more
-              </a>
-            </li>
-          </ul>
-        </div>
-        <div id="social">
-          <svg className="icon" role="presentation" aria-hidden="true">
-            <use href="/icons.svg#social-icon"></use>
-          </svg>
-          <h2>Connect with us</h2>
-          <p>Join the Vite community</p>
-          <ul>
-            <li>
-              <a href="https://github.com/vitejs/vite" target="_blank">
-                <svg
-                  className="button-icon"
-                  role="presentation"
-                  aria-hidden="true"
-                >
-                  <use href="/icons.svg#github-icon"></use>
-                </svg>
-                GitHub
-              </a>
-            </li>
-            <li>
-              <a href="https://chat.vite.dev/" target="_blank">
-                <svg
-                  className="button-icon"
-                  role="presentation"
-                  aria-hidden="true"
-                >
-                  <use href="/icons.svg#discord-icon"></use>
-                </svg>
-                Discord
-              </a>
-            </li>
-            <li>
-              <a href="https://x.com/vite_js" target="_blank">
-                <svg
-                  className="button-icon"
-                  role="presentation"
-                  aria-hidden="true"
-                >
-                  <use href="/icons.svg#x-icon"></use>
-                </svg>
-                X.com
-              </a>
-            </li>
-            <li>
-              <a href="https://bsky.app/profile/vite.dev" target="_blank">
-                <svg
-                  className="button-icon"
-                  role="presentation"
-                  aria-hidden="true"
-                >
-                  <use href="/icons.svg#bluesky-icon"></use>
-                </svg>
-                Bluesky
-              </a>
-            </li>
-          </ul>
-        </div>
-      </section>
-
-      <div className="ticks"></div>
-      <section id="spacer"></section>
-    </>
-  )
+        <nav className="site-nav" id="site-nav" aria-label="Primary navigation">
+          <NavLink className={({ isActive }) => "nav-link" + (isActive ? " active" : "")} to="/">Home</NavLink>
+          <NavLink className={({ isActive }) => "nav-link" + (isActive ? " active" : "")} to="/about.html">About</NavLink>
+          <NavLink className={({ isActive }) => "nav-link" + (isActive ? " active" : "")} to="/services.html">Services</NavLink>
+          <NavLink className={({ isActive }) => "nav-link" + (isActive ? " active" : "")} to="/approach.html">Technology &amp; Approach</NavLink>
+          <NavLink className={({ isActive }) => "nav-link" + (isActive ? " active" : "")} to="/why-neto.html">Why NETO</NavLink>
+          <NavLink className={({ isActive }) => "nav-link" + (isActive ? " active" : "")} to="/careers.html">Careers</NavLink>
+          <NavLink className={({ isActive }) => "nav-link" + (isActive ? " active" : "")} to="/insights.html">Insights</NavLink>
+          <NavLink className={({ isActive }) => "nav-link nav-cta" + (isActive ? " active" : "")} to="/contact.html">Contact</NavLink>
+        </nav>
+      </div>
+    </header>
+  );
 }
 
-export default App
+/* -------------------------------------------------
+   Footer – replicates original static footer with dynamic year
+   ------------------------------------------------- */
+function Footer() {
+  const year = new Date().getFullYear();
+  return (
+    <footer className="site-footer" aria-label="Footer">
+      <div className="container footer-grid">
+        <div className="footer-brand">
+          <div className="brand footer-brand-row">
+            <span className="brand-mark" aria-hidden="true"></span>
+            <span className="brand-name">
+              NETO TECHNOLOGY SOLUTIONS PRIVATE LIMITED
+            </span>
+          </div>
+          <p className="footer-text">
+            NETO Technology Solutions designs and deploys AI‑driven intelligent systems and
+            future‑ready software solutions.
+          </p>
+        </div>
+        <div className="footer-links" aria-label="Footer links">
+          <Link to="/about.html">About</Link>
+          <Link to="/services.html">Services</Link>
+          <Link to="/contact.html">Contact</Link>
+          <Link to="/insights.html">Insights</Link>
+        </div>
+        <div className="footer-meta">
+          <div>© <span id="year">{year}</span> NETO TECHNOLOGY SOLUTIONS PRIVATE LIMITED. All rights reserved.</div>
+          <div className="footer-small">A NETO Technology Solutions initiative.</div>
+        </div>
+      </div>
+    </footer>
+  );
+}
+
+
+function App() {
+  return (
+    <Router>
+      <Header />
+
+      <Routes>
+        <Route path="/" element={<Home />} />
+        <Route path="/about.html" element={<About />} />
+        <Route path="/services.html" element={<Services />} />
+        <Route path="/approach.html" element={<Approach />} />
+        <Route path="/why-neto.html" element={<WhyNeto />} />
+        <Route path="/careers.html" element={<Careers />} />
+        <Route path="/insights.html" element={<Insights />} />
+        <Route path="/contact.html" element={<Contact />} />
+      </Routes>
+
+      <Footer />
+    </Router>
+  );
+}
+
+export default App;
