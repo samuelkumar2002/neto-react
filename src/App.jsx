@@ -35,7 +35,7 @@ function Header() {
     <header className="site-header" id="top">
       <div className="container header-inner">
         <a className="brand" href="#top" aria-label="Go to top">
-          <img src={logo} alt="NETO logo" className="logo-image" style={{ height: '70px', marginRight: '0.5rem' }} aria-hidden="true" />
+          <img src={logo} alt="NETO logo" className="logo-image" aria-hidden="true" />
           <span className="brand-name">NETO Technology Solutions</span>
         </a>
         <button
