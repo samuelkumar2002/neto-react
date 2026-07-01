@@ -438,34 +438,89 @@ img, picture, video {
 /* Footer */
 .site-footer {
   background: var(--bg);
-  padding: 3rem 0;
+  padding: 60px 0 40px;
   border-top: 1px solid var(--border);
 }
 
 .footer-grid {
   display: grid;
-  gap: 2rem;
-  grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+  grid-template-columns: 1.5fr 1fr 1fr;
+  gap: 48px;
+  align-items: start;
+}
+
+.brand.footer-brand-row {
+  align-items: flex-start;
 }
 
 .footer-brand .brand-name {
-  font-weight: 600;
+  white-space: normal;
+  font-size: clamp(20px, 5vw, 28px);
+  line-height: 1.3;
+  font-weight: 700;
+  word-break: break-word;
+  overflow-wrap: anywhere;
+}
+
+.footer-text {
+  margin-top: 16px;
+  max-width: 100%;
+  line-height: 1.7;
+  color: var(--text);
+}
+
+.footer-links {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+  text-align: left;
 }
 
 .footer-links a {
   display: block;
-  margin-bottom: 0.5rem;
   color: var(--text);
   text-decoration: none;
+  transition: color 0.2s ease;
 }
 
-.footer-links a:hover {
-  color: var(--accent);
+@media (min-width: 1024px) {
+  .footer-links a:hover {
+    color: var(--accent);
+  }
 }
 
 .footer-meta {
-  font-size: 0.875rem;
+  text-align: left;
+  font-size: 14px;
+  line-height: 1.6;
   color: var(--text);
+}
+
+.footer-small {
+  margin-top: 8px;
+}
+
+/* Footer Responsive */
+@media (max-width: 1023px) {
+  .footer-grid {
+    grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+    gap: 32px;
+  }
+}
+
+@media (max-width: 767px) {
+  .site-footer {
+    padding: 32px 20px;
+  }
+  
+  .footer-grid {
+    grid-template-columns: 1fr;
+    gap: 24px;
+  }
+  
+  .footer-links a {
+    padding: 8px 0;
+  }
 }
 
 /* Typography */
