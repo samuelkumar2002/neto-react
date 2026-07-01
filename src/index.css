@@ -43,13 +43,16 @@ img, picture, video {
   max-width: 100%;
   height: auto;
   display: block;
+  object-fit: contain;
 }
 
 /* Utility container */
 .container {
-  max-width: 1400px;
+  max-width: 1200px;
+  width: 100%;
   margin: 0 auto;
-  padding: 0 1rem;
+  padding-left: 20px;
+  padding-right: 20px;
 }
 
 /* Header */
@@ -59,7 +62,7 @@ img, picture, video {
   background: var(--bg);
   z-index: 1000;
   box-shadow: var(--shadow);
-  padding: 0.75rem 1rem;
+  padding: 0.75rem 0;
 }
 
 .header-inner {
@@ -104,10 +107,6 @@ img, picture, video {
 
 /* Header responsive adjustments */
 @media (max-width: 1023px) {
-  .site-header {
-    padding-left: 1rem; /* ~16px */
-    padding-right: 1rem;
-  }
   .brand {
     gap: 10px;
   }
@@ -119,10 +118,6 @@ img, picture, video {
   }
 }
 @media (max-width: 767px) {
-  .site-header {
-    padding-left: 1.5rem; /* ~24px */
-    padding-right: 1.5rem;
-  }
   .brand {
     gap: 8px;
   }
@@ -192,8 +187,10 @@ img, picture, video {
 .post-grid,
 .quote-grid,
 .contact-grid {
-  grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(min(260px, 100%), 1fr));
   gap: 1.5rem;
+  width: 100%;
 }
 
 
@@ -247,6 +244,8 @@ img, picture, video {
     left: 0;
     right: 0;
     padding: 1rem;
+    box-shadow: var(--shadow);
+    z-index: 1000;
   }
 
   .site-nav.open {
@@ -256,7 +255,9 @@ img, picture, video {
 
 /* Buttons */
 .button {
-  display: inline-block;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
   padding: 0.75rem 1.5rem;
   border: none;
   border-radius: 8px;
@@ -265,6 +266,7 @@ img, picture, video {
   transition: background 0.2s, transform 0.2s;
   text-align: center;
   text-decoration: none;
+  box-sizing: border-box;
 }
 
 .button.primary {
@@ -328,6 +330,18 @@ img, picture, video {
   }
 }
 
+@media (max-width: 767px) {
+  .hero-actions {
+    flex-direction: column;
+    width: 100%;
+    gap: 1rem;
+  }
+  .hero-actions .button {
+    width: 100%;
+    padding: 1rem 1.5rem;
+  }
+}
+
 .logos {
   display: flex;
   gap: 1.5rem;
@@ -363,8 +377,9 @@ img, picture, video {
 .quote-grid,
 .contact-grid {
   display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+  grid-template-columns: repeat(auto-fit, minmax(min(260px, 100%), 1fr));
   gap: 1.5rem;
+  width: 100%;
 }
 
 .feature,
@@ -415,6 +430,7 @@ img, picture, video {
   margin-bottom: 1rem;
   display: flex;
   flex-direction: column;
+  width: 100%;
 }
 
 .field label {
@@ -429,6 +445,7 @@ img, picture, video {
   border-radius: 6px;
   font: inherit;
   width: 100%;
+  box-sizing: border-box;
 }
 
 .field textarea {
@@ -533,6 +550,8 @@ h6 {
   font-family: var(--heading);
   line-height: 1.2;
   margin: 0;
+  word-break: break-word;
+  overflow-wrap: anywhere;
 }
 
 h1 {
@@ -547,8 +566,22 @@ h3 {
   font-size: clamp(20px, 2vw + 0.25rem, 28px);
 }
 
+h4 {
+  font-size: clamp(18px, 1.5vw + 0.25rem, 24px);
+}
+
+h5 {
+  font-size: clamp(16px, 1.2vw + 0.25rem, 20px);
+}
+
+h6 {
+  font-size: clamp(14px, 1vw + 0.25rem, 18px);
+}
+
 p {
   margin: 0 0 1rem 0;
+  max-width: 100%;
+  line-height: 1.6;
 }
 
 /* Responsive typography tweaks */
